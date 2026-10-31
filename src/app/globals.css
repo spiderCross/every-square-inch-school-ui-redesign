@@ -1,0 +1,220 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #140086;
+  --color-primary-dark: #0e005e;
+  --color-primary-deep: #07032f;
+  --color-primary-light: #2a18b0;
+  --color-secondary: #e0590e;
+  --color-secondary-dark: #b3470a;
+  --color-secondary-light: #f0854a;
+  --color-ink: #15132e;
+  --color-muted: #55556d;
+  /* Soft indigo-tinted mist used for alternating sections (was undefined before) */
+  --color-tint: #f4f3fd;
+  /* Warm peach used sparingly for friendly highlights */
+  --color-sand: #fff3ea;
+  --font-sans: var(--font-body);
+
+  --shadow-soft: 0 1px 2px rgba(21, 19, 46, 0.04), 0 1px 3px rgba(21, 19, 46, 0.05);
+  --shadow-lift: 0 28px 60px -24px rgba(20, 0, 134, 0.28);
+  --shadow-orange: 0 14px 30px -14px rgba(224, 89, 14, 0.55);
+  --shadow-indigo: 0 14px 30px -14px rgba(20, 0, 134, 0.55);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #15132e;
+
+  /* Topographic contour lines: the "map" motif behind hero, stats and CTA */
+  --contours: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640' viewBox='0 0 640 640' fill='none' stroke='%23ffffff' stroke-width='1.2'%3E%3Cpath d='M-20 420C80 360 140 460 250 420S420 300 500 340 640 420 700 380'/%3E%3Cpath d='M-20 380C80 320 150 420 255 380S415 260 500 300 640 380 700 340'/%3E%3Cpath d='M-20 340C80 280 160 380 260 340S410 220 500 260 640 340 700 300'/%3E%3Cpath d='M-20 300C80 240 170 340 265 300S405 180 500 220 640 300 700 260'/%3E%3Cpath d='M-20 260C80 200 180 300 270 260S400 140 500 180 640 260 700 220'/%3E%3Cpath d='M-20 220C80 160 190 260 275 220S395 100 500 140 640 220 700 180'/%3E%3Cpath d='M-20 180C80 120 200 220 280 180S390 60 500 100 640 180 700 140'/%3E%3Cpath d='M-20 520C100 470 180 560 290 520S440 430 520 470 640 540 700 500'/%3E%3Cpath d='M-20 560C100 510 190 600 295 560S440 470 520 510 640 580 700 540'/%3E%3C/svg%3E");
+  --contours-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='640' viewBox='0 0 640 640' fill='none' stroke='%23140086' stroke-width='1.2'%3E%3Cpath d='M-20 420C80 360 140 460 250 420S420 300 500 340 640 420 700 380'/%3E%3Cpath d='M-20 380C80 320 150 420 255 380S415 260 500 300 640 380 700 340'/%3E%3Cpath d='M-20 340C80 280 160 380 260 340S410 220 500 260 640 340 700 300'/%3E%3Cpath d='M-20 300C80 240 170 340 265 300S405 180 500 220 640 300 700 260'/%3E%3Cpath d='M-20 260C80 200 180 300 270 260S400 140 500 180 640 260 700 220'/%3E%3Cpath d='M-20 220C80 160 190 260 275 220S395 100 500 140 640 220 700 180'/%3E%3Cpath d='M-20 180C80 120 200 220 280 180S390 60 500 100 640 180 700 140'/%3E%3Cpath d='M-20 520C100 470 180 560 290 520S440 430 520 470 640 540 700 500'/%3E%3Cpath d='M-20 560C100 510 190 600 295 560S440 470 520 510 640 580 700 540'/%3E%3C/svg%3E");
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display), var(--font-body), system-ui, sans-serif;
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-secondary);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgba(224, 89, 14, 0.22);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-linear-to-r from-primary via-primary-light to-secondary bg-clip-text text-transparent;
+  }
+
+  .bg-tint-strong {
+    @apply bg-primary/4.5;
+  }
+
+  .bg-contours {
+    background-image: var(--contours);
+    background-size: 640px 640px;
+  }
+
+  .bg-contours-dark {
+    background-image: var(--contours-dark);
+    background-size: 640px 640px;
+  }
+
+  /* Window-shaped frame: echoes "learning beyond classrooms" */
+  .arch {
+    border-top-left-radius: 999px;
+    border-top-right-radius: 999px;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  }
+  .section {
+    @apply py-8 sm:py-12;
+  }
+  /* Small orange rule + sentence-case label (no all-caps) */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-sm font-semibold tracking-wide text-secondary-dark;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-0.5 w-7 rounded-full bg-current;
+  }
+  .h-section {
+    @apply text-3xl font-bold tracking-tight text-ink sm:text-4xl;
+  }
+  .lead {
+    @apply text-base leading-relaxed text-muted sm:text-lg;
+  }
+  .card {
+    @apply relative overflow-hidden rounded-3xl border border-primary/10 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-lift;
+  }
+  .card::after {
+    content: "";
+    @apply pointer-events-none absolute inset-x-0 top-0 h-1 bg-linear-to-r from-secondary via-secondary-light to-primary opacity-0 transition-opacity duration-300;
+  }
+  .card:hover::after {
+    @apply opacity-100;
+  }
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-200 active:scale-[0.98];
+  }
+  .btn svg {
+    @apply transition-transform duration-200;
+  }
+  .btn:hover svg {
+    @apply translate-x-0.5;
+  }
+  .btn-primary {
+    @apply bg-linear-to-br from-primary to-primary-light text-white shadow-indigo hover:brightness-110;
+  }
+  .btn-secondary {
+    @apply bg-linear-to-br from-secondary to-secondary-dark text-white shadow-orange hover:brightness-110;
+  }
+  .btn-outline {
+    @apply border border-white/40 bg-primary text-white backdrop-blur-md hover:bg-primary-light;
+  }
+  /* For use on dark / indigo backgrounds */
+  .btn-light {
+    @apply border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white hover:text-primary;
+  }
+  .btn-ghost {
+    @apply border border-primary/20 bg-white text-primary shadow-soft hover:border-primary/40 hover:bg-primary/5;
+  }
+  .link-arrow {
+    @apply inline-flex items-center gap-1.5 text-sm font-semibold text-secondary-dark transition-all hover:gap-2.5 hover:text-secondary;
+  }
+  .nav-link {
+    @apply rounded-full px-4 py-2 text-sm font-medium text-ink/75 transition hover:bg-primary/6 hover:text-primary;
+  }
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white px-4 py-2 text-sm font-medium text-ink shadow-soft transition hover:border-secondary/50 hover:text-secondary-dark;
+  }
+  .field {
+    @apply w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-slate-400 focus:border-primary focus:ring-4 focus:ring-primary/15;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-semibold text-ink;
+  }
+  .glass {
+    @apply border border-white/20 bg-white/10 backdrop-blur-md;
+  }
+  .orb {
+    @apply pointer-events-none absolute rounded-full blur-3xl;
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(24px, -28px) scale(1.08);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-28px, 22px) scale(0.94);
+  }
+}
+
+.animate-float-slower {
+  animation: float-slower 18s ease-in-out infinite;
+}
+
+/* One orchestrated page-load moment: the hero arch rises into place */
+@keyframes arch-rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-arch-rise {
+  animation: arch-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
